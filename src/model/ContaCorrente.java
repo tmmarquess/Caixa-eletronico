@@ -37,16 +37,6 @@ public class ContaCorrente {
         return this.transacoes;
     }
 
-    public void imprimeExtrato() {
-    System.out.println("-------------Extrato------------");
-    System.out.println("================================");
-    for (Transacao atual : transacoes) {
-        System.out.println(atual);
-    }
-    System.out.println("================================");
-    System.out.println("Saldo atual: R$%.2f".formatted(saldo));
-    }
-
     private void registrarTransacao(Transacao transacao) {
         transacoes.add(transacao);
     }
@@ -69,11 +59,6 @@ public class ContaCorrente {
 
     @Override
     public String toString() {
-        return """
-                Conta: %d
-                Agencia: %d
-                Saldo: R$%.2f
-                """
-                .formatted(numeroConta, numeroAgencia, saldo);
+        return "Conta: %d | Agencia: %d | Saldo: R$%.2f".formatted(numeroConta, numeroAgencia, saldo);
     }
 }
