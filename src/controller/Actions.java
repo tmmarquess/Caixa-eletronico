@@ -1,4 +1,4 @@
-package resources;
+package controller;
 
 import java.util.Scanner;
 
@@ -6,54 +6,14 @@ import model.Cliente;
 import model.ContaCorrente;
 import model.Transacao;
 
-public class Tela {
+public class Actions {
+    public Cliente cliente;
+    public ContaCorrente conta;
+    public Scanner leitor;
+    public boolean terminado;
+    public String menu = "1 - Depositar\t\tSacar - 2\n3 - Extrato\t\t Sair - 4\n";
 
-    private Cliente cliente;
-    private ContaCorrente conta;
-
-    private Scanner leitor;
-    private boolean terminado;
-    private String menu = "1 - Depositar\t\tSacar - 2\n3 - Extrato\t\t Sair - 4\n";
-
-    public Tela() {
-        leitor = new Scanner(System.in);
-        cliente = null;
-        conta = null;
-        terminado = false;
-    }
-
-    public void mostrarTela() {
-        String opcao;
-        cadastrarCliente();
-        cadastrarConta();
-
-        while (!terminado) {
-            do {
-                System.out.println("Bem vindo(a), %s. O que deseja fazer?".formatted(cliente.nome));
-                System.out.println(conta);
-                System.out.printf(menu);
-                opcao = leitor.nextLine();
-            } while (!opcao.matches("[1-4]"));
-
-            switch (opcao) {
-                case "1": // depositar
-                    depositar();
-                    break;
-                case "2": // sacar
-                    sacar();
-                    break;
-                case "3": // extrato
-                    imprimeExtrato();
-                    break;
-                case "4":
-                    leitor.close();
-                    terminado = true;
-                    break;
-            }
-        }
-    }
-
-    private void cadastrarConta() {
+    public void cadastrarConta() {
         System.out.println("---------Cadastrando Conta--------");
         int numeroConta, numeroAgencia;
 
@@ -67,7 +27,7 @@ public class Tela {
         leitor.nextLine(); // limpando o buffer
     }
 
-    private void cadastrarCliente() {
+    public void cadastrarCliente() {
         System.out.println("---------Cadastrando Cliente--------");
         String nome, cpf, rg, endereco;
 
@@ -86,7 +46,7 @@ public class Tela {
         cliente = new Cliente(nome, cpf, rg, endereco);
     }
 
-    private void depositar() {
+    public void depositar() {
         float valor;
         System.out.println("Digite o valor a se depositar:");
         valor = leitor.nextFloat();
@@ -96,7 +56,7 @@ public class Tela {
         System.out.println("\nValor depositado com sucesso!\n");
     }
 
-    private void sacar() {
+    public void sacar() {
         float valor;
         System.out.println("Digite o valor a se sacar:");
         valor = leitor.nextFloat();
@@ -111,7 +71,7 @@ public class Tela {
         }
     }
 
-    private void imprimeExtrato() {
+    public void imprimeExtrato() {
         System.out.println("-------------Extrato------------");
         System.out.println("================================");
         for (Transacao extrato : conta.obterExtrato()) {

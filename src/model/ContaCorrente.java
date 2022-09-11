@@ -24,7 +24,7 @@ public class ContaCorrente {
     }
 
     public boolean sacar(float valor) {
-        if (saldo - valor >= 0) {
+        if (saldo - valor >= 0 && valor > 0) {
             this.saldo -= valor;
             Transacao t = new Transacao(saldo, "saque", valor);
             registrarTransacao(t);

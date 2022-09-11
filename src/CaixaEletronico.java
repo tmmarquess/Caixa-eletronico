@@ -3,7 +3,7 @@ import java.util.Scanner;
 import model.Cliente;
 import model.ContaCorrente;
 import model.Transacao;
-import resources.Tela;
+import view.Tela;
 
 public class CaixaEletronico {
     public static void main(String[] args) {
